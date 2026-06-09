@@ -1,23 +1,22 @@
-# Ex.No:5(E) MULTITHREADING -SYNCHRONIZATION
+# Ex.No:5(D) THREAD PRIORITY
 
 ## QUESTION:
+Write a java program for determine the priority and name of the current thread.
 
-Read N numbers from user, use a fixed thread pool (size 3) to compute the sum of each number multiplied by 2. Return results in order.
-
+Note : Read the threadname from the User
 
 ## AIM:
 
-To Read N numbers from user, use a fixed thread pool (size 3) to compute the sum of each number multiplied by 2. Return results in order.
-
+To Write a java program for determine the priority and name of the current thread.
 
 ## ALGORITHM :
 1.	Start the program.
 2.	Import the necessary package 'java.util'
-3.	Read T and then read T numbers from the user and store them in a list.
-4.	Create a fixed thread pool with 3 threads using Executors.newFixedThreadPool(3).
-5.	For each number, submit a task to the executor that returns the number multiplied by 2.
-6.	Store all submitted tasks as Future objects and later retrieve their results using future.get().
-7.	Print each processed result and finally shut down the executor service.
+3.	Read a thread name from the user using Scanner.
+4.	Get the reference of the current running thread using Thread.currentThread().
+5.	Change the name of the current thread to the user-provided name.
+6.	Retrieve the current thread’s priority using getPriority().
+7.	Print the thread’s priority, updated name, and full thread information.
 
 
 
@@ -28,41 +27,31 @@ To Read N numbers from user, use a fixed thread pool (size 3) to compute the sum
 ## PROGRAM:
  ```
 /*
-Program to implement a Synchronization concept using Java
+Program to implement a Thread Priority Concept using Java
 Developed by: Monika D
 RegisterNumber:  212223240096
 */
 ```
 
 ```
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Scanner;
 
-public class FixedThreadPoolExample {
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
+public class CurrentThreadInfo {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int T = Integer.parseInt(sc.nextLine());
-        List<Integer> numbers = new ArrayList<>();
+        String threadName = sc.nextLine();
 
-        for (int i = 0; i < T; i++) {
-            numbers.add(Integer.parseInt(sc.nextLine()));
-        }
+        Thread currentThread = Thread.currentThread();
 
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        currentThread.setName(threadName);
 
-        List<Future<Integer>> futures = new ArrayList<>();
+        int priority = currentThread.getPriority();
 
-        for (int num : numbers) {
-            Future<Integer> future = executor.submit(() -> num * 2);
-            futures.add(future);
-        }
+        System.out.println("Priority of Thread: " + priority);
+        System.out.println("Name of Thread: " + currentThread.getName());
+        System.out.println(currentThread);
 
-        for (Future<Integer> future : futures) {
-            System.out.println("Result: " + future.get());
-        }
-
-        executor.shutdown();
         sc.close();
     }
 }
@@ -75,8 +64,9 @@ public class FixedThreadPoolExample {
 
 ## OUTPUT:
 
-<img width="436" height="450" alt="image" src="https://github.com/user-attachments/assets/30642057-d25c-4044-aa0e-35afc87daabe" />
+<img width="810" height="216" alt="image" src="https://github.com/user-attachments/assets/ca622a76-977c-4f2b-adbd-152f41676c8d" />
 
 
 ## RESULT:
-Thus, the program to Read N numbers from user, use a fixed thread pool (size 3) to compute the sum of each number multiplied by 2 executed successfully.
+
+Thus, the program to determine the priority and name of the current thread is executed successfully.
